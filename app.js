@@ -17,9 +17,26 @@ app.get(
 		for (const c in contacts) {
 			delete c.password;
 			c.fullname = c.firstname + c.lastname;
+			c.referrer = user.id;
 		}
 
 		res.json(contacts);
+	}
+);
+
+app.get(
+	'contact/:id',
+	authenticate,
+	(req, res, next) => {
+		const contactId = req.params.id;
+
+		const contact = db.contact.get(contactId);
+
+		delete contact.password;
+		c.fullname = c.firstname + c.lastname;
+		c.referrer = user.id;
+
+		res.json(c);
 	}
 );
 
